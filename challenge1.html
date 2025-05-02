@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔓 Challenge 1: Crack the Password</title>
+    <style>
+        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
+        #solution { padding: 10px; background: #222; }
+    </style>
+</head>
+<body>
+    <h1>🔓 CRACK THE PASSWORD</h1>
+    <p>The attacker left a password hash. Decrypt it to find the first key fragment!</p>
+    <p><strong>Hash:</strong> <code>5f4dcc3b5aa765d61d8327deb882cf99</code></p>
+    
+    <p>💡 Hint: It's a common 8-letter password.</p>
+    
+    <input type="text" id="solution" placeholder="Enter the plaintext password...">
+    <button onclick="checkSolution()">SUBMIT</button>
+    
+    <script>
+        function checkSolution() {
+            const answer = document.getElementById("solution").value.toLowerCase();
+            if (answer === "password") {
+                alert("✅ CORRECT! First key fragment: 7F3B");
+            } else {
+                alert("❌ Wrong. Try again!");
+            }
+        }
+    </script>
+</body>
+</html>
