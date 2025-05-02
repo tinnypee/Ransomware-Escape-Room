@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📧 Challenge 4: Investigate the Phishing Email</title>
+    <style>
+        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
+        .email { background: #222; padding: 15px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>📧 INVESTIGATE THE PHISHING EMAIL</h1>
+    <p>Find 3 red flags in this email to get the final key fragment.</p>
+    
+    <div class="email">
+        <p><strong>From:</strong> support@legit-bank.com</p>
+        <p><strong>Subject:</strong> Urgent: Your account is locked!</p>
+        <p>Dear user,</p>
+        <p>We detected suspicious activity. Click <a href="http://hacker.com/login">here</a> to unlock your account.</p>
+        <p>- Bank Security Team</p>
+    </div>
+    
+    <p>🔍 Flag 1: The sender's domain doesn't match the bank's real domain.</p>
+    <p>🔍 Flag 2: The link goes to "hacker.com".</p>
+    <p>🔍 Flag 3: Generic greeting ("Dear user").</p>
+    
+    <button onclick="alert('✅ CORRECT! Final key fragment: 1B8F')">I FOUND THE FLAGS</button>
+</body>
+</html>
