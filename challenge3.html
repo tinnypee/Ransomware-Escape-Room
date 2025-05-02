@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📡 Challenge 3: Analyze the Packet Capture</title>
+    <style>
+        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
+        img { max-width: 100%; border: 1px solid #0f0; }
+    </style>
+</head>
+<body>
+    <h1>📡 ANALYZE THE PACKET CAPTURE</h1>
+    <p>The attacker communicated with a C2 server. Find its IP!</p>
+    
+    <img src="fake_pcap.png" alt="Fake Wireshark screenshot">
+    <p>💡 Hint: Look for HTTP traffic to a suspicious IP.</p>
+    
+    <input type="text" id="solution" placeholder="Enter the C2 IP...">
+    <button onclick="checkSolution()">SUBMIT</button>
+    
+    <script>
+        function checkSolution() {
+            const answer = document.getElementById("solution").value.trim();
+            if (answer === "192.168.1.100") {
+                alert("✅ CORRECT! Third key fragment: D4E7");
+            } else {
+                alert("❌ Wrong. Look for HTTP traffic!");
+            }
+        }
+    </script>
+</body>
+</html>
