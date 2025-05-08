@@ -3,6 +3,22 @@
 <head>
     <title>🔓 Challenge 1: Crack the Password</title>
     <style>
+        /* Add this to your existing styles */
+        #timer-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: black;
+            padding: 5px 10px;
+            border: 1px solid red;
+            z-index: 1000;
+        }
+        #timer {
+            font-size: 1.5em;
+            color: red;
+            font-weight: bold;
+        }
+        
         body { 
             font-family: 'Courier New', monospace; 
             background: #111; 
@@ -72,6 +88,11 @@
     </style>
 </head>
 <body>
+    <!-- Add this timer container at the top of your body -->
+    <div id="timer-container">
+        TIME LEFT: <span id="timer">10:00</span>
+    </div>
+
     <h1>🔓 CRACK THE PASSWORD</h1>
     <p>The attacker left a password hash. Decrypt it to find the first key fragment!</p>
     
@@ -86,6 +107,41 @@
     </div>
     
     <script>
+        // Initialize timer from localStorage or start new countdown
+        let timeLeft = localStorage.getItem('ransomwareTimer') || 600;
+        
+        // Convert to number if it was stored as string
+        timeLeft = Number(timeLeft);
+        
+        const timerElement = document.getElementById("timer");
+        
+        // Update timer display immediately
+        updateTimerDisplay();
+        
+        // Start countdown
+        const timer = setInterval(() => {
+            timeLeft--;
+            localStorage.setItem('ransomwareTimer', timeLeft);
+            updateTimerDisplay();
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                alert("⏰ TIME'S UP! The ransomware destroyed your files.");
+                // Optional: redirect to failure page
+            }
+        }, 1000);
+        
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            timerElement.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            
+            // Make it flash red when under 1 minute
+            if (timeLeft <= 60) {
+                timerElement.style.color = (Math.floor(Date.now() / 500) % 2) ? 'red' : 'white';
+            }
+        }
+
         // Track challenge progress
         if (!localStorage.getItem('challengeProgress')) {
             localStorage.setItem('challengeProgress', JSON.stringify({
