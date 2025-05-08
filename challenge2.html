@@ -85,16 +85,22 @@
     <button onclick="checkSolution()">SUBMIT</button>
 
     <script>
-    const progress = JSON.parse(localStorage.getItem('challengeProgress'));
-    if (!progress?.completed.includes('challenge1')) 
-    {
-        alert("❌ Complete Challenge 1 first!");
-        window.location.href = "challenge1.html";
-    }
-        
+    // SECURITY CHECK - Must be FIRST in <script>
+        const progress = JSON.parse(localStorage.getItem('challengeProgress')) || { completed: [] };
+        if (!progress.completed.includes('challenge1')) {
+            alert("❌ Complete Challenge 1 first!");
+            window.location.href = "challenge1.html";
+        }
+
         function checkSolution() {
             const answer = document.getElementById("solution").value.toLowerCase();
             if (answer === "4c400ac8532035c855dcda61bcf318789421156776c6cf8bebafa4b8db6cfcd0") {
+                // UPDATE PROGRESS BEFORE REDIRECT
+                if (!progress.completed.includes('challenge2')) {
+                    progress.completed.push('challenge2');
+                    localStorage.setItem('challengeProgress', JSON.stringify(progress));
+                }
+                
                 alert("✅ CORRECT! First key fragment: A9C2");
                 window.location.href = "https://tinnypee.github.io/challenge3.html";
             } else {
