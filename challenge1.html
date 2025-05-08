@@ -14,64 +14,103 @@
         h1 {
             color: #0f0;
             margin-bottom: 20px;
+            text-align: center;
         }
         code {
             background: #333;
             color: #0f0;
-            padding: 2px 5px;
+            padding: 10px;
             word-break: break-all;
+            display: block;
+            margin: 15px 0;
+            border-left: 3px solid #0f0;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
         }
         input {
             background-color: #222;
             color: #0f0;
             border: 1px solid #0f0;
-            padding: 10px;
+            padding: 12px;
             font-family: 'Courier New', monospace;
-            margin: 10px 0;
-            width: 300px;
+            flex-grow: 1;
+            font-size: 16px;
         }
         button {
-            background-color: #222;
-            color: #0f0;
-            border: 1px solid #0f0;
-            padding: 10px 15px;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-        button:hover {
             background-color: #0f0;
             color: #111;
+            border: 1px solid #0f0;
+            padding: 12px 20px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #00cc00;
         }
         p {
             margin: 15px 0;
+            line-height: 1.5;
         }
         .hint {
             color: #0f0;
             font-style: italic;
+            background: #222;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .hash-label {
+            color: #0f0;
+            font-weight: bold;
+            margin-top: 25px;
         }
     </style>
 </head>
 <body>
     <h1>🔓 CRACK THE PASSWORD</h1>
     <p>The attacker left a password hash. Decrypt it to find the first key fragment!</p>
-    <p><strong>Hash:</strong> <code>42f749ade7f9e195bf475f37a44cafcb</code></p>
     
-    <p class="hint">💡 Hint: It's a common 11-letter password. Crack or Guess</p>
+    <span class="hash-label">MD5 HASH:</span>
+    <code>42f749ade7f9e195bf475f37a44cafcb</code>
     
-    <div>
-        <input type="text" id="solution" placeholder="Enter the plaintext password...">
-        <button onclick="checkSolution()">SUBMIT</button>
+    <p class="hint">💡 Hint: It's a common 11-character password with uppercase, lowercase and numbers. Crack or Guess it !!</p>
+    
+    <div class="input-group">
+        <input type="text" id="solution" placeholder="Enter the plaintext password..." autocomplete="off">
+        <button onclick="checkSolution()">DECRYPT</button>
     </div>
     
     <script>
+        // Track challenge progress
+        if (!localStorage.getItem('challengeProgress')) {
+            localStorage.setItem('challengeProgress', JSON.stringify({
+                started: new Date().toISOString(),
+                completed: []
+            }));
+        }
+
         function checkSolution() {
-            const answer = document.getElementById("solution").value.toLowerCase();
+            const answer = document.getElementById("solution").value;
+            const progress = JSON.parse(localStorage.getItem('challengeProgress'));
+            
             if (answer === "Password123") {
+                // Update progress
+                if (!progress.completed.includes('challenge1')) {
+                    progress.completed.push('challenge1');
+                    localStorage.setItem('challengeProgress', JSON.stringify(progress));
+                }
+                
                 alert("✅ CORRECT! First key fragment: 7F3B\nRedirecting to next challenge...");
-                window.location.href = "https://tinnypee.github.io/challenge2.html";
+                setTimeout(() => {
+                    window.location.href = "https://tinnypee.github.io/challenge2.html";
+                }, 1500);
             } else {
-                alert("❌ Wrong. Try again!");
+                alert("❌ Incorrect! The hash doesn't match this password.");
             }
         }
 
