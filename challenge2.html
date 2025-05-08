@@ -85,6 +85,13 @@
     <button onclick="checkSolution()">SUBMIT</button>
 
     <script>
+    const progress = JSON.parse(localStorage.getItem('challengeProgress'));
+    if (!progress?.completed.includes('challenge1')) 
+    {
+        alert("❌ Complete Challenge 1 first!");
+        window.location.href = "challenge1.html";
+    }
+        
         function checkSolution() {
             const answer = document.getElementById("solution").value.toLowerCase();
             if (answer === "4c400ac8532035c855dcda61bcf318789421156776c6cf8bebafa4b8db6cfcd0") {
