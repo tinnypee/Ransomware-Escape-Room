@@ -1,23 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>💻 Challenge 2: Follow the money</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow the Bitcoin</title>
     <style>
-        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
-        pre { background: #222; padding: 15px; }
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #111;
+            color: #0f0;
+        }
+        .ransom-note {
+            background-color: #222;
+            border: 2px dashed #0f0;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .address {
+            font-family: monospace;
+            background-color: #333;
+            color: #0f0;
+            padding: 5px;
+            word-break: break-all;
+        }
+        .success {
+            color: #0f0;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #0f0;
+        }
+        a {
+            color: #0f0;
+            text-decoration: underline;
+        }
+        input {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            margin-right: 10px;
+        }
+        button {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 8px 15px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0f0;
+            color: #111;
+        }
     </style>
 </head>
 <body>
-    <h1>💻 REVERSE THE MALWARE</h1>
-    <p>Find the decryption key hidden in this ransomware script:</p>
+    <h1>🚨 Follow the Bitcoin 🚨</h1>
     
-    <pre>
-# ransomware.py
-def encrypt_files():
-    key = "KEYPART2: A9C2"  # The key is here!
-    print("Your files are encrypted! Pay $1M in Bitcoin.")
-    </pre>
-    
-    <p>🔍 Search the code for the second key fragment.</p>
+    <div class="ransom-note">
+        <h2>=== RANSOM NOTE ===</h2>
+        <p>Your files have been encrypted! To recover them, send <strong>0.1 BTC</strong> to:</p>
+        <p class="address">bc1pavmaqy82u2ta3l0lczjjqv000d22rmxqygpvpr3p0mr76uqjkprq8whxdh</p>
+        <p>After payment, email your ID to: <strong>recovery@today.com</strong></p>
+        <p><em>Do not attempt to trace this payment or your files will be lost forever!</em></p>
+    </div>
+
+    <h2>📌 Challenge Objective</h2>
+    <p>Research the given Bitcoin address and provide:</p>
+    <ul>
+        <li>First known transaction ID (TXID)</li>
+    </ul>
+
+    <h2>🔍 Tools & Tips</h2>
+    <ul>
+        <li>Use a Bitcoin blockchain explorer (e.g., <a href="https://blockstream.info" target="_blank">Blockstream</a>, <a href="https://www.blockchain.com/explorer" target="_blank">Blockchain.com</a>)</li>
+    </ul>
+
+    <input type="text" id="solution" placeholder="Enter TXID Here...">
+    <button onclick="checkSolution()">SUBMIT</button>
+
+    <script>
+        function checkSolution() {
+            const answer = document.getElementById("solution").value.toLowerCase();
+            if (answer === "4c400ac8532035c855dcda61bcf318789421156776c6cf8bebafa4b8db6cfcd0") {
+                alert("✅ CORRECT! First key fragment: A9C2");
+            } else {
+                alert("❌ Wrong. Try again!");
+            }
+        }
+    </script>
 </body>
 </html>
