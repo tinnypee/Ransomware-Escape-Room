@@ -1,28 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>📧 Challenge 4: Investigate the Phishing Email</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Email Investigation</title>
     <style>
-        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
-        .email { background: #222; padding: 15px; margin: 10px 0; }
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #111;
+            color: #0f0;
+        }
+        .email {
+            background: #222;
+            border: 2px dashed #0f0;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .answer-box {
+            background: #222;
+            padding: 15px;
+            border: 1px solid #0f0;
+            margin-bottom: 20px;
+        }
+        input {
+            background-color: #333;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 8px;
+            margin: 10px 0;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            background-color: #222;
+            color: #0f0;
+            padding: 10px 15px;
+            border: 1px solid #0f0;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0f0;
+            color: #111;
+        }
+        .hidden {
+            display: none;
+        }
+        pre {
+            background: #333;
+            padding: 10px;
+            overflow-x: auto;
+            color: #0f0;
+        }
+        h1, h2, h3 {
+            color: #0f0;
+        }
+        a {
+            color: #0f0;
+            text-decoration: underline;
+        }
+        #error {
+            color: #f00;
+            margin-top: 10px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
-    <h1>📧 INVESTIGATE THE PHISHING EMAIL</h1>
-    <p>Find 3 red flags in this email to get the final key fragment.</p>
+    <h1>🔍 Phishing Email Investigation Challenge</h1>
     
     <div class="email">
-        <p><strong>From:</strong> support@legit-bank.com</p>
-        <p><strong>Subject:</strong> Urgent: Your account is locked!</p>
-        <p>Dear user,</p>
-        <p>We detected suspicious activity. Click <a href="http://hacker.com/login">here</a> to unlock your account.</p>
-        <p>- Bank Security Team</p>
+        <h2>URGENT: Your Account Has Been Locked</h2>
+        <p><strong>From:</strong> "Bank Security" &lt;security@yourbank-support.com&gt;</p>
+        <p><strong>Reply-To:</strong> reply@secure-bank-update.com</p>
+        <p><strong>Date:</strong> Mon, 15 May 2023 09:34:22 +0000</p>
+        
+        <div class="email-body">
+            <p>Dear Customer,</p>
+            <p>We've detected suspicious activity on your account. For your security, we've temporarily locked your online banking access.</p>
+            <p>To unlock your account, please verify your identity by clicking below:</p>
+            <p><a href="https://yourbank-verify.com/secure?id=VmFsaWQ6Q3VzdG9tZXI=">Verify Your Account Now</a></p>
+            <p>If you did not initiate this request, please contact us immediately.</p>
+            <p><em>- Bank Security Team</em></p>
+        </div>
+        
+        <h3>Email Headers</h3>
+        <pre>
+Received: from mx1.yourbank-support.com (192.168.1.100)
+    by mailserver.yourbank.com with SMTP;
+    Mon, 15 May 2023 09:34:22 +0000
+Received: from [146.112.61.74] (port=587 helo=mailer.secure-bank.org)
+    by mx1.yourbank-support.com with ESMTP
+    (TLSv1.2) id 1a2b3c4d5e; Mon, 15 May 2023 09:34:21 +0000
+X-Originating-IP: 146.112.61.74
+Message-ID: &lt;20230515093421.1a2b3c4d5e@mailer.secure-bank.org&gt;
+Return-Path: bounce@yourbank-support.com
+        </pre>
     </div>
-    
-    <p>🔍 Flag 1: The sender's domain doesn't match the bank's real domain.</p>
-    <p>🔍 Flag 2: The link goes to "hacker.com".</p>
-    <p>🔍 Flag 3: Generic greeting ("Dear user").</p>
-    
-    <button onclick="alert('✅ CORRECT! Final key fragment: 1B8F')">I FOUND THE FLAGS</button>
+
+    <div class="answer-box">
+        <h2>Investigation Questions</h2>
+        
+        <div>
+            <label for="ip">1. What is the sender's real IP address?</label>
+            <input type="text" id="ip" placeholder="e.g., 192.168.1.1">
+        </div>
+        
+        <div>
+            <label for="reply-to">2. What email address is set as the Reply-To?</label>
+            <input type="text" id="reply-to" placeholder="e.g., user@example.com">
+        </div>
+        
+        <div>
+            <label for="isp">3. What ISP is associated with the sender's IP? (Hint: IP Lookup)</label>
+            <input type="text" id="isp" placeholder="e.g., Amazon Technologies">
+        </div>
+        
+        <button onclick="checkAnswers()">Submit Answers</button>
+        
+        <p id="error" class="hidden">One or more answers are incorrect. Try again!</p>
+    </div>
+
+    <script>
+        function checkAnswers() {
+            // Correct answers
+            const correctAnswers = {
+                ip: "146.112.61.74",
+                replyTo: "reply@secure-bank-update.com",
+                isp: "Cisco OpenDNS LLC" // Actual ISP for 146.112.61.74
+            };
+            
+            // Get user answers
+            const userIP = document.getElementById('ip').value.trim();
+            const userReplyTo = document.getElementById('reply-to').value.trim();
+            const userISP = document.getElementById('isp').value.trim();
+            
+            // Validate answers (case insensitive for email/ISP)
+            if (userIP === correctAnswers.ip &&
+                userReplyTo.toLowerCase() === correctAnswers.replyTo.toLowerCase() &&
+                userISP.toLowerCase() === correctAnswers.isp.toLowerCase()) {
+                
+                // Redirect to success page
+                window.location.href = "https://tinnypee.github.io/win.html";
+            } else {
+                // Show error
+                document.getElementById('error').classList.remove('hidden');
+            }
+        }
+
+        // Allow Enter key to submit from any input field
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    checkAnswers();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
