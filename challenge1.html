@@ -3,29 +3,84 @@
 <head>
     <title>🔓 Challenge 1: Crack the Password</title>
     <style>
-        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
-        #solution { padding: 10px; background: #222; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: #111; 
+            color: #0f0; 
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #0f0;
+            margin-bottom: 20px;
+        }
+        code {
+            background: #333;
+            color: #0f0;
+            padding: 2px 5px;
+            word-break: break-all;
+        }
+        input {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            width: 300px;
+        }
+        button {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 10px 15px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #0f0;
+            color: #111;
+        }
+        p {
+            margin: 15px 0;
+        }
+        .hint {
+            color: #0f0;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
     <h1>🔓 CRACK THE PASSWORD</h1>
     <p>The attacker left a password hash. Decrypt it to find the first key fragment!</p>
-    <p><strong>Hash:</strong> <code>5f4dcc3b5aa765d61d8327deb882cf99</code></p>
+    <p><strong>Hash:</strong> <code>42f749ade7f9e195bf475f37a44cafcb</code></p>
     
-    <p>💡 Hint: It's a common 8-letter password.</p>
+    <p class="hint">💡 Hint: It's a common 11-letter password. Crack or Guess</p>
     
-    <input type="text" id="solution" placeholder="Enter the plaintext password...">
-    <button onclick="checkSolution()">SUBMIT</button>
+    <div>
+        <input type="text" id="solution" placeholder="Enter the plaintext password...">
+        <button onclick="checkSolution()">SUBMIT</button>
+    </div>
     
     <script>
         function checkSolution() {
             const answer = document.getElementById("solution").value.toLowerCase();
             if (answer === "password") {
-                alert("✅ CORRECT! First key fragment: 7F3B");
+                alert("✅ CORRECT! First key fragment: 7F3B\nRedirecting to next challenge...");
+                window.location.href = "https://tinnypee.github.io/challenge2.html";
             } else {
                 alert("❌ Wrong. Try again!");
             }
         }
+
+        // Allow Enter key to submit
+        document.getElementById("solution").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkSolution();
+            }
+        });
     </script>
 </body>
 </html>
