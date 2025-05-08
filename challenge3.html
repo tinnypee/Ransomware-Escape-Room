@@ -1,31 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>📡 Challenge 3: Analyze the Packet Capture</title>
+    <title>Ransomware Escape Room - Decryption Puzzle</title>
     <style>
-        body { font-family: monospace; background: #111; color: #0f0; padding: 20px; }
-        img { max-width: 100%; border: 1px solid #0f0; }
+        body { 
+            font-family: 'Courier New', monospace; 
+            background: #111; 
+            color: #0f0; 
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .ransom-note { 
+            background: #222;
+            border: 2px dashed #0f0; 
+            padding: 15px; 
+            margin: 20px 0;
+        }
+        .ciphertext { 
+            background: #333; 
+            padding: 10px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        .flag { 
+            color: #0f0; 
+            font-weight: bold; 
+        }
+        h1, h2 {
+            color: #0f0;
+        }
+        code {
+            background: #333;
+            padding: 2px 5px;
+        }
+        strong {
+            color: #0f0;
+        }
+        em {
+            color: #0f0;
+            font-style: normal;
+        }
+        input {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            width: 300px;
+        }
+        button {
+            background-color: #222;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 8px 15px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: #0f0;
+            color: #111;
+        }
     </style>
 </head>
 <body>
-    <h1>📡 ANALYZE THE PACKET CAPTURE</h1>
-    <p>The attacker communicated with a C2 server. Find its IP!</p>
-    
-    <img src="fake_pcap.png" alt="Fake Wireshark screenshot">
-    <p>💡 Hint: Look for HTTP traffic to a suspicious IP.</p>
-    
-    <input type="text" id="solution" placeholder="Enter the C2 IP...">
-    <button onclick="checkSolution()">SUBMIT</button>
-    
+    <h1>🔐 Ransomware Decryption Puzzle</h1>
+    <div class="ransom-note">
+        <h2>=== YOUR FILES ARE ENCRYPTED ===</h2>
+        <p>To decrypt, solve the puzzle below:</p>
+        <div class="ciphertext">
+            <p>Encrypted Key: <strong>VjJ0eWMyRXlSblZqU0VwMFltdHdNRmx0ZUhwaFdGSnNZak5LYkdOdFZuVmtXRXBzWW01T2JHTjVRbXRaVjNoc1kzbENNR0ZIVm5WSlIxSndZbWxDYVZwWFpHeGlibEpvWVZjMWVtUllTbk5pTTJSNVdWaFNjR0l5</strong></p>
+            <p>Hint: <em>"The key is encoded, not encrypted. Look for layers."</em></p>
+        </div>
+    </div>
+    <h2>🎯 Objective</h2>
+    <p>Decode the "Encrypted Key" above to recover the ransomware's decryption key.</p>
+    <p><span class="flag">FLAG Format:</span> <code>KEYPART3:XXXX</code> (submit the full key)</p>
+
+    <div>
+        <input type="text" id="answerInput" placeholder="Enter decryption key (KEYPART3:XXXX)">
+        <button onclick="checkAnswer()">SUBMIT</button>
+    </div>
+
     <script>
-        function checkSolution() {
-            const answer = document.getElementById("solution").value.trim();
-            if (answer === "192.168.1.100") {
-                alert("✅ CORRECT! Third key fragment: D4E7");
+        function checkAnswer() {
+            const correctAnswer = "KEYPART3:B7F1";
+            const userAnswer = document.getElementById("answerInput").value.trim().toUpperCase();
+            
+            if (userAnswer === correctAnswer) {
+                alert("✅ Correct! Decryption successful. Redirecting to next challenge...");
+                window.location.href = "https://tinnypee.github.io/challenge4.html";
             } else {
-                alert("❌ Wrong. Look for HTTP traffic!");
+                alert("❌ Incorrect! Keep trying. Remember the format: KEYPART3:XXXX");
             }
         }
+
+        // Allow Enter key to submit
+        document.getElementById("answerInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        });
     </script>
 </body>
 </html>
