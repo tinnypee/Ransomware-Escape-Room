@@ -3,22 +3,6 @@
 <head>
     <title>Ransomware Escape Room - Decryption Puzzle</title>
     <style>
-        /* Add timer styles */
-        #timer-container {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background: black;
-            padding: 5px 10px;
-            border: 1px solid red;
-            z-index: 1000;
-        }
-        #timer {
-            font-size: 1.5em;
-            color: red;
-            font-weight: bold;
-        }
-        
         body { 
             font-family: 'Courier New', monospace; 
             background: #111; 
@@ -82,11 +66,6 @@
     </style>
 </head>
 <body>
-    <!-- Timer container added at the top -->
-    <div id="timer-container">
-        TIME LEFT: <span id="timer">10:00</span>
-    </div>
-
     <h1>🔐 Ransomware Decryption Puzzle</h1>
     <div class="ransom-note">
         <h2>=== YOUR FILES ARE ENCRYPTED ===</h2>
@@ -106,59 +85,11 @@
     </div>
 
     <script>
-        // Initialize timer from localStorage or start new countdown
-        let timeLeft = localStorage.getItem('ransomwareTimer') || 600;
-        
-        // Convert to number if it was stored as string
-        timeLeft = Number(timeLeft);
-        
-        const timerElement = document.getElementById("timer");
-        
-        // Update timer display immediately
-        updateTimerDisplay();
-        
-        // Start countdown
-        const timer = setInterval(() => {
-            timeLeft--;
-            localStorage.setItem('ransomwareTimer', timeLeft);
-            updateTimerDisplay();
-            
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                alert("⏰ TIME'S UP! The ransomware destroyed your files.");
-                // Optional: redirect to failure page
-            }
-        }, 1000);
-        
-        function updateTimerDisplay() {
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
-            timerElement.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            
-            // Make it flash red when under 1 minute
-            if (timeLeft <= 60) {
-                timerElement.style.color = (Math.floor(Date.now() / 500) % 2) ? 'red' : 'white';
-            }
-        }
-
-        // Check challenge progression
-        const progress = JSON.parse(localStorage.getItem('challengeProgress')) || { completed: [] };
-        if (!progress.completed.includes('challenge2')) {
-            alert("❌ Complete Challenge 2 first!");
-            window.location.href = "challenge2.html";
-        }
-
         function checkAnswer() {
             const correctAnswer = "KEYPART3:B7F1";
             const userAnswer = document.getElementById("answerInput").value.trim().toUpperCase();
             
             if (userAnswer === correctAnswer) {
-                // Update progress before redirect
-                if (!progress.completed.includes('challenge3')) {
-                    progress.completed.push('challenge3');
-                    localStorage.setItem('challengeProgress', JSON.stringify(progress));
-                }
-                
                 alert("✅ Correct! Decryption successful. Redirecting to next challenge...");
                 window.location.href = "https://tinnypee.github.io/challenge4.html";
             } else {
