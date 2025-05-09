@@ -60,6 +60,17 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.onkeydown = (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) 
+            {
+                alert("Nope! Finish the challenge properly.");
+                return false;
+            }
+        };
+    </script>
+    
     <h1>🚨 Follow the Bitcoin 🚨</h1>
     
     <div class="ransom-note">
