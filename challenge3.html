@@ -66,6 +66,17 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.onkeydown = (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) 
+            {
+                alert("Nope! Finish the challenge properly.");
+                return false;
+            }
+        };
+    </script>
+    
     <h1>🔐 Ransomware Decryption Puzzle</h1>
     <div class="ransom-note">
         <h2>=== YOUR FILES ARE ENCRYPTED ===</h2>
