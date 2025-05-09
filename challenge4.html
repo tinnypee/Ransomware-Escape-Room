@@ -75,6 +75,17 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.onkeydown = (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) 
+            {
+                alert("Nope! Finish the challenge properly.");
+                return false;
+            }
+        };
+    </script>
+    
     <h1>🔍 Phishing Email Investigation Challenge</h1>
     
     <div class="email">
