@@ -72,6 +72,17 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.onkeydown = (e) => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) 
+            {
+                alert("Nope! Finish the challenge properly.");
+                return false;
+            }
+        };
+    </script>
+    
     <h1>🔓 CRACK THE PASSWORD</h1>
     <p>The attacker left a password hash. Decrypt it to find the first key fragment!</p>
     
