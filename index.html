@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>🚨 YOUR NETWORK IS UNDER ATTACK! 🚨</h1>
-    <p>A ransomware virus has encrypted all your files. You have <span id="timer">10:00</span> to stop it!</p>
+    <p>A ransomware virus has encrypted all your files. You have to stop it!</p>
     
     <h2>🛠️ CHALLENGES:</h2>
     <ol>
@@ -20,19 +20,6 @@
         <li><a class="challenge-link" href="/challenge4.html">📧 Investigate the Phishing Email</a></li>
     </ol>
 
-    <script>
-        // 10-minute countdown
-        let timeLeft = 600;
-        const timer = setInterval(() => {
-            timeLeft--;
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
-            document.getElementById("timer").textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                alert("⏰ TIME'S UP! The ransomware destroyed your files.");
-            }
-        }, 1000);
-    </script>
+
 </body>
 </html>
